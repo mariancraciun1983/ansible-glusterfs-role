@@ -6,10 +6,10 @@
     <img src="https://travis-ci.com/mariancraciun1983/ansible-glusterfs-role.svg?branch=master" alt="Build Status" />
   </a>
   <a href="https://galaxy.ansible.com/mariancraciun1983/glusterfs_cluster">
-    <img src="https://img.shields.io/ansible/role/51683" alt="Ansible Galaxy" />
+    <img src="https://img.shields.io/ansible/role/51687" alt="Ansible Galaxy" />
   </a>
   <a href="https://galaxy.ansible.com/mariancraciun1983/glusterfs_cluster">
-    <img src="https://img.shields.io/ansible/quality/51683" alt="Ansible Quality Score" />
+    <img src="https://img.shields.io/ansible/quality/51687" alt="Ansible Quality Score" />
   </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License" />
