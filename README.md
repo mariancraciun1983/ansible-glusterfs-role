@@ -2,8 +2,8 @@
 <br />
 
 <div align="center">
-  <a href="https://travis-ci.com/mariancraciun1983/ansible-glusterfs-cluster">
-    <img src="https://travis-ci.com/mariancraciun1983/ansible-glusterfs-cluster.svg?branch=master" alt="Build Status" />
+  <a href="https://travis-ci.com/mariancraciun1983/ansible-glusterfs-role">
+    <img src="https://travis-ci.com/mariancraciun1983/ansible-glusterfs-role.svg?branch=master" alt="Build Status" />
   </a>
   <a href="https://galaxy.ansible.com/mariancraciun1983/glusterfs_cluster">
     <img src="https://img.shields.io/ansible/role/51683" alt="Ansible Galaxy" />
