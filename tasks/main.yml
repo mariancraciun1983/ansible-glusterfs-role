@@ -1,0 +1,15 @@
+---
+- name: packages
+  import_tasks: packages.yml
+  tags:
+    - packages
+
+- name: config
+  block:
+  - name: config | brick
+    include_tasks: config.yml
+    with_items: "{{ gluster_bricks }}"
+    loop_control:
+        loop_var: brick
+  tags:
+    - config

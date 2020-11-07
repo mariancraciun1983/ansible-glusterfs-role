@@ -1,0 +1,58 @@
+- name: cluster | ensure glusterd is up
+  service:
+    name: glusterd
+    state: started
+
+- name: configure | ensure Gluster brick and mount directories exist.
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0775
+  with_items:
+    - "{{ brick.brick_dir }}"
+    - "{{ brick.brick_name }}"
+
+- name: configure | ensure enough hosts for the cluster
+  assert:
+    that:
+      - play_hosts|length >= brick.brick_replicas
+    fail_msg: >-
+      a minimum of {{ brick.brick_replicas }}
+      servers is required to configure a new cluster
+    quiet: yes
+
+- name: configure | set gluster ip for the service
+  set_fact:
+    gluster_service_ip: "{% if gluster_use_internal_ip %}{{ internal_ip }}{% else %}{{ ansible_default_ipv4.address }}{% endif %}"
+
+- name: configure | ensure enough hosts for the cluster
+  assert:
+    that:
+      - gluster_service_ip|length > 1
+    fail_msg: failed detecting gluster_service_ip
+    quiet: yes
+
+- name: configure | configure distributed Gluster volume with internal ip
+  gluster_volume:
+    state: present
+    name: "{{ brick.brick_name }}"
+    brick: "{{ brick.brick_dir }}"
+    cluster: "{{ play_hosts | map('extract', hostvars, 'gluster_service_ip') | list }}"
+    disperses: "{{ brick.brick_disperses | default(omit) }}"
+    redundancies: "{{ brick.brick_redundancies | default(omit) }}"
+    replicas: "{{ brick.brick_replicas | default(omit) }}"
+    host: "{{ gluster_service_ip }}"
+    rebalance: "{{ brick.brick_rebalance | default(omit) }}"
+    force: yes
+    options:
+      performance.cache-size: 256MB
+  run_once: true
+
+- name: configure | ensure Gluster volume is mounted.
+  mount:
+    name: "{{ brick.mount_dir }}"
+    src: "{{ internal_ip }}:/{{ brick.brick_name }}"
+    fstype: glusterfs
+    opts: noauto,_netdev,x-systemd.automount,x-systemd.mount-timeout=10s,x-systemd.idle-timeout=10m
+    state: mounted
+  when: brick.mount_dir

@@ -1,0 +1,11 @@
+internal_ip:
+gluster_use_internal_ip: false
+gluster_version: 7
+gluster_bricks:
+  - brick_dir: /gluster/brick1
+    mount_dir: /mnt/brick1
+    brick_name: brick1
+    brick_replicas: 3 # number of bricks must be a multiple of replica count
+    brick_disperses:
+    brick_redundancies:
+    rebalance:

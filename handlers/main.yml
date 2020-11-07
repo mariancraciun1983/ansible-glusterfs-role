@@ -1,0 +1,9 @@
+- name: start glusterd
+  service:
+    name: glusterd
+    state: started
+
+- name: restart glusterd
+  service:
+    name: glusterd
+    state: restarted

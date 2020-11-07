@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: glusterfs
+  author: Marian Craciun
+  description: Install glusterfs and setup a cluster
+  license: MIT
+
+  min_ansible_version: 2.7
+  galaxy_tags:
+    - glusterfs
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - bionic
+        - xenial
+dependencies: []
